@@ -23,13 +23,13 @@ import com.vaadin.testbench.elementsbase.ServerClass;
 public class OrderEditViewElement extends OrderEditViewDesignElement {
 
 	public static class OrderInfo {
-		LocalDate dueDate;
-		LocalTime dueTime;
-		Customer customer;
-		String pickupLocation;
-		List<ProductOrderData> products;
-		String total;
-		OrderState state;
+		public LocalDate dueDate;
+		public LocalTime dueTime;
+		public Customer customer;
+		public String pickupLocation;
+		public List<ProductOrderData> products;
+		public String total;
+		public OrderState state;
 	}
 
 	public OrderState getCurrentState() {

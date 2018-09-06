@@ -1,25 +1,39 @@
 package org.vaadin.bdd.ui.views;
 
+import org.jbehave.core.annotations.Then;
 import org.junit.Assert;
-import org.junit.Test;
+import org.openqa.selenium.WebElement;
+import org.vaadin.bdd.AbstractStep;
+import org.vaadin.bdd.AbstractStory;
 
-import org.vaadin.bdd.AbstractIT;
+import java.util.Collections;
+import java.util.List;
 
-public class MenuIT extends AbstractIT {
+/**
+ * MenuIT test rewritten as a BDD story.
+ */
+public class MenuIT extends AbstractStory {
 
-	@Test
-	public void adminSeesAdminMenus() {
-		loginAsAdmin();
-		MenuElement menu = $(MenuElement.class).first();
-		Assert.assertNotNull(menu.getMenuLink("Users"));
-		Assert.assertNotNull(menu.getMenuLink("Products"));
+	@Override
+	public List<Class<? extends AbstractStep>> getStepClasses() {
+		return Collections.singletonList(StorySteps.class);
 	}
 
-	@Test
-	public void baristaDoesNotSeeAdminMenus() {
-		loginAsBarista();
-		MenuElement menu = $(MenuElement.class).first();
-		Assert.assertNull(menu.getMenuLink("Users"));
-		Assert.assertNull(menu.getMenuLink("Products"));
+	public static class StorySteps extends AbstractStep {
+		@Then("I see menu link $linkCaption")
+		public void assertMenuLinkExists(String linkCaption) {
+			Assert.assertNotNull(getMenuLink(linkCaption));
+		}
+
+		@Then("I don't see menu link $linkCaption")
+		public void assertMenuLinkDoesntExist(String linkCaption) {
+			Assert.assertNull(getMenuLink(linkCaption));
+		}
+
+		private WebElement getMenuLink(String linkCaption) {
+			MenuElement menu = $(MenuElement.class).first();
+			return menu.getMenuLink(linkCaption);
+		}
 	}
+
 }
