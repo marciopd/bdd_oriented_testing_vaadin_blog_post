@@ -1,7 +1,6 @@
 This project is used on blog post [BDD oriented testing in a Vaadin project](https://vaadin.com/blog/BDD-oriented-testing-in-a-Vaadin-project).
 
-It demonstrates how to setup [JBehave](https://jbehave.org/) on your [Vaadin](https://vaadin.com/) projects and start refactoring your UI 
-Tests in order to be written as executable BDD stories.
+It demonstrates a quick way to setup [JBehave](https://jbehave.org/) on your [Vaadin](https://vaadin.com/) projects and start refactoring your [UI Tests](https://vaadin.com/docs/v8/testbench/testbench-overview.html) into executable BDD stories.
 
 Please refer to the [blog post](https://vaadin.com/blog/BDD-oriented-testing-in-a-Vaadin-project) to see more details.
 
