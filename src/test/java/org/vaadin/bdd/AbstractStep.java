@@ -15,6 +15,7 @@ public abstract class AbstractStep extends AbstractIT {
 
 	private Runnable beforeScenarioListener;
 	private Runnable afterScenarioListener;
+    private Runnable afterScenarioFailureListener;
 
 	public void onBeforeScenario(Runnable beforeScenarioListener) {
 		this.beforeScenarioListener = beforeScenarioListener;
@@ -24,6 +25,10 @@ public abstract class AbstractStep extends AbstractIT {
 		this.afterScenarioListener = afterScenarioListener;
 	}
 
+    public void onAfterScenarioFailure(Runnable afterScenarioFailureListener) {
+        this.afterScenarioFailureListener = afterScenarioFailureListener;
+    }
+
 	@BeforeScenario(uponType = ScenarioType.ANY)
 	public void beforecenario() {
 		if (beforeScenarioListener != null) {
@@ -31,11 +36,23 @@ public abstract class AbstractStep extends AbstractIT {
 		}
 	}
 
-	@AfterScenario(uponType = ScenarioType.ANY)
-	public void afterScenario() {
+	@AfterScenario(uponOutcome = AfterScenario.Outcome.SUCCESS)
+	public void afterScenarioSuccess() {
+		runAfterScenarioListener();
+	}
+
+	private void runAfterScenarioListener() {
 		if (afterScenarioListener != null) {
 			afterScenarioListener.run();
 		}
+	}
+
+	@AfterScenario(uponOutcome = AfterScenario.Outcome.FAILURE)
+	public void afterScenarioFailure() {
+	    if (afterScenarioFailureListener != null) {
+            afterScenarioFailureListener.run();
+        }
+		runAfterScenarioListener();
 	}
 
 	@Given("I log in as admin")
