@@ -15,7 +15,7 @@ public abstract class AbstractStep extends AbstractIT {
 
 	private Runnable beforeScenarioListener;
 	private Runnable afterScenarioListener;
-    private Runnable afterScenarioFailureListener;
+	private Runnable afterScenarioFailureListener;
 
 	public void onBeforeScenario(Runnable beforeScenarioListener) {
 		this.beforeScenarioListener = beforeScenarioListener;
@@ -25,9 +25,9 @@ public abstract class AbstractStep extends AbstractIT {
 		this.afterScenarioListener = afterScenarioListener;
 	}
 
-    public void onAfterScenarioFailure(Runnable afterScenarioFailureListener) {
-        this.afterScenarioFailureListener = afterScenarioFailureListener;
-    }
+	public void onAfterScenarioFailure(Runnable afterScenarioFailureListener) {
+		this.afterScenarioFailureListener = afterScenarioFailureListener;
+	}
 
 	@BeforeScenario(uponType = ScenarioType.ANY)
 	public void beforecenario() {
@@ -49,9 +49,9 @@ public abstract class AbstractStep extends AbstractIT {
 
 	@AfterScenario(uponOutcome = AfterScenario.Outcome.FAILURE)
 	public void afterScenarioFailure() {
-	    if (afterScenarioFailureListener != null) {
-            afterScenarioFailureListener.run();
-        }
+		if (afterScenarioFailureListener != null) {
+			afterScenarioFailureListener.run();
+		}
 		runAfterScenarioListener();
 	}
 

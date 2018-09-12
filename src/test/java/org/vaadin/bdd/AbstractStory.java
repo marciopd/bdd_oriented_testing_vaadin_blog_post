@@ -2,6 +2,7 @@ package org.vaadin.bdd;
 
 import com.vaadin.testbench.HasDriver;
 import com.vaadin.testbench.screenshot.ImageFileUtil;
+
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -11,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+
 import org.jbehave.core.configuration.Configuration;
 import org.jbehave.core.configuration.MostUsefulConfiguration;
 import org.jbehave.core.embedder.StoryControls;
@@ -124,7 +126,7 @@ public abstract class AbstractStory extends JUnitStory implements HasDriver {
 	 */
 	private static class TestBenchBootstrap extends AbstractIT {
 
-	    private static final Logger LOGGER = Logger.getLogger(TestBenchBootstrap.class.getName());
+		private static final Logger LOGGER = Logger.getLogger(TestBenchBootstrap.class.getName());
 
 		WebDriver buildDriver() {
 			quit();
@@ -141,20 +143,20 @@ public abstract class AbstractStory extends JUnitStory implements HasDriver {
 
 		public void takeScreenShot(String fileName) {
 			try (InputStream inputStream = new ByteArrayInputStream(((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.BYTES))) {
-                BufferedImage screenShotImage = ImageIO.read(inputStream);
-                ImageFileUtil.createScreenshotDirectoriesIfNeeded();
-                String screenShotFileName = fileName + "_" + System.nanoTime();
-                File screenShotFile = getErrorScreenShotFile(screenShotFileName);
-                ImageIO.write(screenShotImage, "png", screenShotFile);
-                LOGGER.info("Screenshot file: " + screenShotFile.getAbsolutePath());
+				BufferedImage screenShotImage = ImageIO.read(inputStream);
+				ImageFileUtil.createScreenshotDirectoriesIfNeeded();
+				String screenShotFileName = fileName + "_" + System.nanoTime();
+				File screenShotFile = getErrorScreenShotFile(screenShotFileName);
+				ImageIO.write(screenShotImage, "png", screenShotFile);
+				LOGGER.info("Screenshot file: " + screenShotFile.getAbsolutePath());
 			} catch (IOException e) {
 				throw new RuntimeException("Error while taking screen shot.", e);
 			}
 		}
 
-        private File getErrorScreenShotFile(String fileName) {
-            return ImageFileUtil.getErrorScreenshotFile(fileName + ".png");
-        }
+		private File getErrorScreenShotFile(String fileName) {
+			return ImageFileUtil.getErrorScreenshotFile(fileName + ".png");
+		}
 	}
 
 }
